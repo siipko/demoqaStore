@@ -6,11 +6,16 @@ public class Product {
     private String name;
     private BigDecimal price;
     private int amount;
-
-    public Product(String name, BigDecimal price) {
+    public Product(String name, String price) {
         this.name = name;
-        this.price = price;
+        this.price = new BigDecimal(price.replace("$", ""));
         amount = 1;
+    }
+
+    public Product(String name, String price, int amount) {
+        this.name = name;
+        this.price = new BigDecimal(price.replace("$", ""));
+        this.amount = amount;
     }
 
     public void addOneProduct() {

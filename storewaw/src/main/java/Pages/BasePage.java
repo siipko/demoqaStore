@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class BasePage {
-    WebDriver driver;
+    public WebDriver driver;
     Actions actionBuilder;
     WebDriverWait wait;
     Random rand = new Random();
 
-    BasePage(WebDriver driver) {
+    public BasePage(WebDriver driver) {
         this.driver = driver;
         actionBuilder = new Actions(driver);
         wait = new WebDriverWait(driver, 20);
@@ -35,7 +35,7 @@ public abstract class BasePage {
     }
 
     WebElement getRandomElement(List<WebElement> elements) {
-        return elements.get(rand.nextInt(elements.size() - 1));
+        return elements.get(rand.nextInt(elements.size()));
     }
 
     void clickRandomElement(List<WebElement> elements) {
