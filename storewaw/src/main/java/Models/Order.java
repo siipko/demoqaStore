@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Order {
     List<Product> products;
+    BigDecimal shippingCost;
 
     public Order() {
         this.products = new ArrayList<>();
@@ -15,7 +16,10 @@ public class Order {
         return products.get(i);
     }
 
-    public void addProduct(Product productToAdd) {
+    public void addShippingCost(BigDecimal shippingCost) {
+        this.shippingCost = shippingCost;
+    }
+        public void addProduct(Product productToAdd) {
         for (Product product : products) {
             if (product.getName().equals(productToAdd.getName())) {
                 product.addOneProduct();
@@ -25,12 +29,19 @@ public class Order {
         products.add(productToAdd);
     }
 
+    public int getSize(){
+        return products.size();
+    }
     public BigDecimal getTotalOrderCost() {
         BigDecimal totalOrderCost = new BigDecimal(0);
         for (Product product : products) {
             totalOrderCost = totalOrderCost.add(product.getTotalPrice());
         }
         return totalOrderCost;
+    }
+
+    public BigDecimal getTotalOrderCostWithShipping() {
+        return getTotalOrderCost().add(shippingCost);
     }
 
     public int getQuantityOfProducts() {

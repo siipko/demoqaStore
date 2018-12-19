@@ -14,7 +14,7 @@ import java.util.Random;
 public abstract class BasePage {
     public WebDriver driver;
     Actions actionBuilder;
-    WebDriverWait wait;
+    protected WebDriverWait wait;
     Random rand = new Random();
 
     public BasePage(WebDriver driver) {

@@ -35,15 +35,21 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void checkoutTest() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             menu.openRandomCategory();
             String nameToCheck = listOfProductsPage.openRandomProduct();
             Assert.assertEquals(nameToCheck, productPage.getProductName());
             productPage.addProduct(order);
         }
+
         menu.openBasket();
         basketPage.verifyProducts(order)
                 .goToInfoPage();
+        addressPage.setUserPersonalData(user)
+                .setShippingSameAsBilling()
+                .addShippingCost(order)
+                .purchase();
+        resultPage.verifyProducts(order);
 
     }
 }

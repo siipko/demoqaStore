@@ -17,7 +17,7 @@ public class Product {
     }
 
     public Product(String name, BigDecimal price, int quantity, BigDecimal totalPrice) {
-        this.name = name.replace("–", "-");
+        this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
