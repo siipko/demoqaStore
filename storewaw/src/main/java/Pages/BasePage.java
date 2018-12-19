@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 
@@ -22,7 +23,7 @@ public abstract class BasePage {
         wait = new WebDriverWait(driver, 20);
     }
 
-    public void waitForElement(WebElement element) {
+    protected void waitForElement(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -40,5 +41,13 @@ public abstract class BasePage {
 
     void clickRandomElement(List<WebElement> elements) {
         getRandomElement(elements).click();
+    }
+
+    protected BigDecimal getDecimal(WebElement element) {
+        return new BigDecimal(element.getText().replace("$", "").replace(",", ""));
+    }
+
+    protected int getInt(WebElement element) {
+        return Integer.parseInt(element.getText());
     }
 }

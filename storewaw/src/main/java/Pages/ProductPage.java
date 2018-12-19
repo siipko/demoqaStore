@@ -9,22 +9,19 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ProductPage extends BasePage {
+    @FindBy(className = "prodtitle")
+    private WebElement productName;
+    @FindBy(css = ".currentprice")
+    private WebElement productPrice;
+    @FindBy(css = ".wpsc_buy_button")
+    private WebElement addToBasket;
+    @FindBy(css = ".count")
+    private WebElement basketCount;
+
     public ProductPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
-    @FindBy(className = "prodtitle")
-    private WebElement productName;
-
-    @FindBy(css = ".currentprice")
-    private WebElement productPrice;
-
-    @FindBy(css = ".wpsc_buy_button")
-    private WebElement addToBasket;
-
-    @FindBy(css = ".count")
-    private WebElement basketCount;
 
     public String getProductName() {
         return productName.getText();
@@ -33,9 +30,10 @@ public class ProductPage extends BasePage {
     public void addProduct(Order order) {
         int n = rand.nextInt(2) + 1;
         for (int i = 0; i < n; i++) {
-            order.addProduct(new Product(getProductName(), productPrice.getText()));
+            order.addProduct(new Product(getProductName(), getDecimal(productPrice)));
             addToBasket.click();
-            wait.until(ExpectedConditions.textToBePresentInElement(basketCount, String.valueOf(order.getAmountOfProducts())));
+            wait.until(ExpectedConditions.textToBePresentInElement(basketCount,
+                    String.valueOf(order.getQuantityOfProducts())));
         }
     }
 

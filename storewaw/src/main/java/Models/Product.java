@@ -5,37 +5,39 @@ import java.math.BigDecimal;
 public class Product {
     private String name;
     private BigDecimal price;
-    private int amount;
-    public Product(String name, String price) {
-        this.name = name;
-        this.price = new BigDecimal(price.replace("$", ""));
-        amount = 1;
+    private BigDecimal totalPrice;
+    private int quantity;
+
+    public Product(String name, BigDecimal price) {
+        this(name, price, 1);
     }
 
-    public Product(String name, String price, int amount) {
-        this.name = name;
-        this.price = new BigDecimal(price.replace("$", ""));
-        this.amount = amount;
+    public Product(String name, BigDecimal price, int quantity) {
+        this(name, price, quantity, price.multiply(new BigDecimal(quantity)));
+    }
+
+    public Product(String name, BigDecimal price, int quantity, BigDecimal totalPrice) {
+        this.name = name.replace("–", "-");
+        this.price = price;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
     }
 
     public void addOneProduct() {
-        amount++;
+        quantity++;
+        totalPrice = price.multiply(new BigDecimal(quantity));
     }
 
     public String getName() {
         return name;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public BigDecimal getProductCost() {
-        return price.multiply(new BigDecimal(amount));
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
 }

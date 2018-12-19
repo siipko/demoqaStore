@@ -8,15 +8,11 @@ public class Order {
     List<Product> products;
 
     public Order() {
-        this.products = new ArrayList<Product>();
+        this.products = new ArrayList<>();
     }
 
     public Product getProduct(int i) {
         return products.get(i);
-    }
-
-    public List<Product> getProducts() {
-        return products;
     }
 
     public void addProduct(Product productToAdd) {
@@ -32,16 +28,16 @@ public class Order {
     public BigDecimal getTotalOrderCost() {
         BigDecimal totalOrderCost = new BigDecimal(0);
         for (Product product : products) {
-            totalOrderCost = totalOrderCost.add(product.getProductCost());
+            totalOrderCost = totalOrderCost.add(product.getTotalPrice());
         }
         return totalOrderCost;
     }
 
-    public int getAmountOfProducts() {
-        int amountOfProducts = 0;
+    public int getQuantityOfProducts() {
+        int quantityOfProducts = 0;
         for (Product product : products) {
-            amountOfProducts += product.getAmount();
+            quantityOfProducts += product.getQuantity();
         }
-        return amountOfProducts;
+        return quantityOfProducts;
     }
 }

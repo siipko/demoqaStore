@@ -16,13 +16,21 @@ public class MenuPage extends BasePage {
     @FindBy(css = "#menu-item-33 .sub-menu li")
     private List<WebElement> submenuItems;
 
+    @FindBy(className = "count")
+    private WebElement count;
+
+
     public MenuPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver,this);
-
+        PageFactory.initElements(driver, this);
     }
 
-    public void openRandomCategory(){
+
+    public void openBasket() {
+        count.click();
+    }
+
+    public void openRandomCategory() {
         moveToElement(products);
         waitForElements(By.cssSelector("#menu-item-33 .sub-menu li"), 6);
         clickRandomElement(submenuItems);

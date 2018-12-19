@@ -4,7 +4,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class BaseTest {
+public abstract class BaseTest {
 
     WebDriver driver;
 
